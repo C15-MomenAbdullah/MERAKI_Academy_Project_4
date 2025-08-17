@@ -34,10 +34,10 @@ const propertySchema = new mongoose.Schema(
       default: true,
     },
 
-    images: {
-      type: [String], 
-      required: true,
-    },
+    images: [{
+      type:String,required:true, 
+      
+    }],
 
     owner: {
       type: mongoose.Schema.Types.ObjectId,

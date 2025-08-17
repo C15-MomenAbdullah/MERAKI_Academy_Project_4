@@ -23,7 +23,7 @@ const register = async (req, res) => {
       });
     }
 
-    const userRole = role || "user"; 
+    const userRole = role || "user"; // edit // 
     const newUser = new User({ firstName, lastName, email, password , role :userRole });
     await newUser.save();
 
