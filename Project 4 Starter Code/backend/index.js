@@ -21,6 +21,8 @@ app.get("/", (req, res) => {
 });
 const userRoutes = require("./routes/users");
 app.use("/users", userRoutes);
+const propertyRoutes = require("./routes/properties");
+app.use("/properties", propertyRoutes);
 
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
