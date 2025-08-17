@@ -23,6 +23,8 @@ const userRoutes = require("./routes/users");
 app.use("/users", userRoutes);
 const propertyRoutes = require("./routes/properties");
 app.use("/properties", propertyRoutes);
+const roleRoutes = require('./routes/role');
+app.use('/roles', roleRoutes);
 
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
