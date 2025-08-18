@@ -1,4 +1,4 @@
-const booking = require("../models/booking")
+
 const Booking = require("../models/booking")
 
 const createBooking = async(req,res) => {
@@ -60,7 +60,7 @@ if (!updatedBooking){
     })}
 res.status(200).json({
     success : true , 
-    booking : updateBooking
+    booking : updatedBooking
 })
 } catch(err){
     console.error("failed",err)
