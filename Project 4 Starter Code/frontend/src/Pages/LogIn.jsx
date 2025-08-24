@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setData } from "../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import WelcomeNavbar from "../components/welcomeNavbar";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,8 @@ const LoginPage = () => {
       const response = await axios.post("http://localhost:5000/users/login", formData);
 
       if (response.data.success) {
+        localStorage.setItem("token", response.data.token);
+
         dispatch(setData({
           user: response.data.user,
           token: response.data.token,
@@ -44,33 +47,51 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+    <>
+      <WelcomeNavbar />
+      <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+        <div className="card shadow p-4" style={{ maxWidth: "400px", width: "100%" }}>
+          <h2 className="mb-4 text-center login-title">Login</h2>
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="form-control"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                autoFocus
+              />
+            </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="form-control"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        {error && <p className="error">{error}</p>}
+            {error && <div className="alert alert-danger">{error}</div>}
 
-        <button type="submit">Login</button>
-        <p>Don't have an account? <a href="/register">Register here</a></p>
-      </form>
-    </div>
+            <button type="submit" className="btn btn-primary w-100">Login</button>
+          </form>
+          <p className="mt-3 text-center">
+            Don't have an account? <a href="/register">Register here</a>
+          </p>
+        </div>
+      </div>
+    </>
   );
 };
 
