@@ -1,42 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ onLogout, onLogin }) => {
+const Navbar = ({ onLogout, onSearchChange }) => {
   const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    onSearchChange(e.target.value);
+  };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <div className="logo">REAL ESTATE</div>
+    <nav className="navbar d-flex justify-content-between align-items-center px-3 py-2 bg-light shadow-sm">
+      <div className="d-flex align-items-center gap-3">
+        <div
+          className="logo fs-4 fw-bold text-primary"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/properties")}
+        >
+          REAL ESTATE
+        </div>
 
         <input
           type="text"
-          className="search-box"
+          className="form-control"
+          style={{ width: "300px" }}
           placeholder="Search properties..."
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
-
-        <select className="section-dropdown" defaultValue="">
-          <option value="">All Sections</option>
-          <option value="apartment">Apartment</option>
-          <option value="villa">Villa</option>
-          <option value="chalet">Chalet</option>
-          <option value="other">Other</option>
-        </select>
       </div>
 
-      <div className="navbar-right">
+      <div className="d-flex align-items-center gap-4 fs-5">
         {user ? (
           <>
-            <button className="bookings-button">My Bookings</button>
-            <button className="logout-button" onClick={onLogout}>
-              Log Out
-            </button>
+            <i
+              className="bi bi-heart-fill text-danger"
+              style={{ cursor: "pointer" }}
+              title="Favourites"
+              onClick={() => navigate("/favourites")}
+            />
+            <i
+              className="bi bi-calendar-check-fill text-success"
+              style={{ cursor: "pointer" }}
+              title="My Bookings"
+              onClick={() => navigate("/mybookings")}
+            />
+            <i
+              className="bi bi-box-arrow-right text-secondary"
+              style={{ cursor: "pointer" }}
+              title="Log Out"
+              onClick={onLogout}
+            />
           </>
         ) : (
-          <button className="login-button" onClick={onLogin}>
-            Log In
-          </button>
+          <i
+            className="bi bi-box-arrow-in-right text-primary"
+            style={{ cursor: "pointer" }}
+            title="Log In"
+            onClick={() => navigate("/")}
+          />
         )}
       </div>
     </nav>

@@ -38,10 +38,13 @@ const LoginPage = () => {
           token: response.data.token,
         }));
 
-        navigate("/properties");  
+        if (response.data.user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/properties");
+        }
       }
     } catch (err) {
-      console.error(err);
       setError(err.response?.data?.message || "Login failed");
     }
   };
@@ -50,11 +53,24 @@ const LoginPage = () => {
     <>
       <WelcomeNavbar />
       <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-        <div className="card shadow p-4" style={{ maxWidth: "400px", width: "100%" }}>
-          <h2 className="mb-4 text-center login-title">Login</h2>
+        <div
+          className="card p-4 shadow"
+          style={{
+            maxWidth: "420px",
+            width: "100%",
+            borderRadius: "16px",
+            border: "none",
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <h2 className="mb-4 text-center" style={{ fontWeight: "bold", color: "#0d6efd" }}>
+            Login
+          </h2>
           <form onSubmit={handleSubmit} noValidate>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email address</label>
+              <label htmlFor="email" className="form-label">
+                Email address
+              </label>
               <input
                 type="email"
                 id="email"
@@ -65,11 +81,14 @@ const LoginPage = () => {
                 onChange={handleChange}
                 required
                 autoFocus
+                style={{ borderRadius: "8px" }}
               />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">Password</label>
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
               <input
                 type="password"
                 id="password"
@@ -79,12 +98,27 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                style={{ borderRadius: "8px" }}
               />
             </div>
 
-            {error && <div className="alert alert-danger">{error}</div>}
+            {error && (
+              <div className="alert alert-danger" style={{ borderRadius: "8px" }}>
+                {error}
+              </div>
+            )}
 
-            <button type="submit" className="btn btn-primary w-100">Login</button>
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
+              style={{
+                borderRadius: "8px",
+                padding: "10px",
+                fontWeight: "500",
+              }}
+            >
+              Login
+            </button>
           </form>
           <p className="mt-3 text-center">
             Don't have an account? <a href="/register">Register here</a>

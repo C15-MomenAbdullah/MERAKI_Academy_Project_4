@@ -29,7 +29,7 @@
   border: none;
   width: 280px;
   font-size: 1rem;
-  background: #2a2a3f;
+  background: #33335a;
   color: #fff;
   transition: background-color 0.3s ease;
 }
@@ -83,7 +83,7 @@
 }
 
 .logout-button {
-  background: #ff4d4d;
+  background: #742626;
   border: none;
   padding: 6px 16px;
   border-radius: 8px;
@@ -115,4 +115,15 @@
   font-family: 'Poppins', sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-weight: 600;
+}
+.favourite-button{
+  background: #7c2020;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
 }
