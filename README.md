@@ -23,21 +23,25 @@ It allows users to browse listings, view detailed property information, and secu
 
 ### Frontend
 
-* React.js
+- React.js
+- Vite
+- HTML
+- CSS
+- JavaScript
 
 ### Backend
 
-* Node.js
-* Express.js
+- Node.js
+- Express.js
 
 ### Database
 
-* MongoDB
+- MongoDB
 
 ### Tools
 
-* Git
-* GitHub
+- Git
+- GitHub
 
 ---
 
